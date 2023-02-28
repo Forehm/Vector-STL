@@ -82,45 +82,21 @@ public:
 
 
 
-    iterator begin()
-    {       
-        return iterator(vector);
-    }
+    iterator begin() { return iterator(vector); }
 
-    iterator end()
-    {
-        return iterator(vector + size);
-    }
+    iterator end() { return iterator(vector + size); }
 
-    reverse_iterator rbegin()
-    {
-        return reverse_iterator(&vector[size - 1]);
-    }
+    reverse_iterator rbegin() { return reverse_iterator(&vector[size - 1]); }
 
-    reverse_iterator rend()
-    {
-        return reverse_iterator(vector - 1);
-    }
+    reverse_iterator rend() { return reverse_iterator(vector - 1); }
 
-    const_reverse_iterator crbegin() const
-    {
-        return const_reverse_iterator(&vector[size - 1]);
-    }
+    const_reverse_iterator crbegin() const { return const_reverse_iterator(&vector[size - 1]); }
 
-    const_reverse_iterator crend() const
-    {
-        return const_reverse_iterator(vector - 1);
-    }
+    const_reverse_iterator crend() const { return const_reverse_iterator(vector - 1); }
 
-    const_iterator cbegin() const
-    {
-        return const_iterator(vector);
-    }
+    const_iterator cbegin() const { return const_iterator(vector); }
 
-    const_iterator cend() const
-    {
-        return const_iterator(vector + size);
-    }
+    const_iterator cend() const { return const_iterator(vector + size); }
 
     int get_capacity() const { return capacity; }
 
@@ -128,6 +104,14 @@ public:
 
     bool is_empty() { return size == 0; }
 
+    T& front() { return vector[0]; }
+
+    T& back() { return vector[size - 1]; }
+  
+    T* data() { return this->vector; }
+  
+    Vector() { vector = new T[size]; }
+  
     void reserve(int value) 
     { 
         capacity = value;
@@ -158,7 +142,7 @@ public:
             delete[]vector;
             vector = arr;
             arr = nullptr;
-            size++;
+            ++size;
            
         }
         else
@@ -168,7 +152,7 @@ public:
             {
                 capacity--;
             }
-            size++;
+            ++size;
         }
        
         
@@ -176,7 +160,7 @@ public:
        
     }
 
-    void shrink_to_fit()
+   void shrink_to_fit()
    {
        capacity = 0;
 
@@ -248,7 +232,7 @@ public:
            
         }
 
-        size++;
+        ++size;
 
     }
 
@@ -303,16 +287,6 @@ public:
         return vector[index]; 
     }
 
-    T& front()
-    {
-        return vector[0];
-    }
-
-    T& back()
-    {
-        return vector[size - 1];
-    }
-
     T& operator = (const Vector& v)
     {
         this->size = v.get_size();
@@ -336,11 +310,6 @@ public:
 
     }
 
-    T* data()
-    {
-        return this->vector;
-    }
-
     string What(int error_number)
     {
         if (error_number == 1)
@@ -351,12 +320,6 @@ public:
         {
             return "the size of the array is too low";
         }
-    }
-
-    Vector()
-    {
-        vector = new T[size];
-        
     }
 
     Vector(Vector& v)
