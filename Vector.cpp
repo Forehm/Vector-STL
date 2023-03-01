@@ -372,6 +372,34 @@ public:
         }
         return false;
     }
+    
+    Vector operator + (const Vector& another)
+    {
+        if (this->get_size() > another.get_size() || this->get_size() == another.get_size())
+        {
+            for (int i = 0; i < another.get_size(); ++i)
+            {
+                this->vector[i] += another.vector[i];
+            }
+        }
+        else
+        {
+            this->reserve(another.get_size() - this->get_size());
+            int i = 0;
+            for ( ; i < this->get_size(); ++i)
+            {
+                this->vector[i] += another.vector[i];
+            }
+
+            for ( ; i < another.get_size(); ++i)
+            {
+                this->vector[i] = another.vector[i];
+            }
+            size += capacity;
+            capacity = 0;
+        }
+        return *this;
+    }
 
 };
 
