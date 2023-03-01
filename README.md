@@ -1,5 +1,6 @@
 # 01.03.2023 Update
-Added overloaded operators == and !=
+Added overloaded operators == and !=;
+Also I have added an overloaded operator +, it works by means of matrix addition method; In the case of string - concatenation. 
 
 # Vector-STL
 a copy of STL vector, but with some advantages
