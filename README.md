@@ -1,3 +1,6 @@
+# 01.03.2023 Update
+Added overloaded operators == and !=
+
 # Vector-STL
 a copy of STL vector, but with some advantages
 
