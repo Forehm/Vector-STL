@@ -1,12 +1,9 @@
 ﻿
-
-
-
-template<typename T> 
-class Vector 
+template<typename T>
+class Vector
 {
 private:
-  
+
 
     int size = 0;
     int capacity = 0;
@@ -18,7 +15,7 @@ public:
     class iterator
     {
     public:
-        
+
         iterator(T* ptr) : ptr_(ptr) { }
         iterator operator++() { iterator i = *this; ptr_++; return i; }
         iterator operator++(int junk) { ptr_++; return *this; }
@@ -32,11 +29,11 @@ public:
         T* ptr_;
     };
 
-    class const_iterator 
+    class const_iterator
     {
     public:
-       
-        
+
+
         const_iterator(T* ptr) : ptr_(ptr) { }
         const_iterator operator++() { const_iterator i = *this; ptr_++; return i; }
         const_iterator operator++(int junk) { ptr_++; return *this; }
@@ -49,8 +46,8 @@ public:
     private:
         T* ptr_;
     };
-   
-    class reverse_iterator 
+
+    class reverse_iterator
     {
     public:
         reverse_iterator(T* ptr) : ptr_(ptr) { }
@@ -65,7 +62,7 @@ public:
         T* ptr_;
     };
 
-    class const_reverse_iterator 
+    class const_reverse_iterator
     {
     public:
         const_reverse_iterator(T* ptr) : ptr_(ptr) { }
@@ -75,7 +72,7 @@ public:
         const T* operator->() { return ptr_; }
         bool operator==(const const_reverse_iterator& rhs) { return ptr_ == rhs.ptr_; }
         bool operator!=(const const_reverse_iterator& rhs) { return ptr_ != rhs.ptr_; }
-       
+
     private:
         T* ptr_;
     };
@@ -102,33 +99,25 @@ public:
 
     int get_size() const { return size; }
 
-    bool is_empty() { return size == 0; }
+    bool is_empty() const { return size == 0; }
 
-    T& front() { return vector[0]; }
-
-    T& back() { return vector[size - 1]; }
-  
-    T* data() { return this->vector; }
-  
-    Vector() { vector = new T[size]; }
-  
-    void reserve(int value) 
-    { 
+    void reserve(const int value)
+    {
         capacity = value;
 
-        T*  arr = new T[size + value];
+        T* arr = new T[size + value];
         for (int i = 0; i < size; ++i)
         {
-             arr[i] = vector[i];
+            arr[i] = vector[i];
         }
-        
+
         delete[]vector;
         vector = arr;
         arr = nullptr;
-           
+
     }
 
-    void push_back(T value)
+    void push_back(const T value)
     {
         T* arr;
         if (capacity <= 0)
@@ -143,7 +132,7 @@ public:
             vector = arr;
             arr = nullptr;
             ++size;
-           
+
         }
         else
         {
@@ -154,27 +143,27 @@ public:
             }
             ++size;
         }
-       
-        
 
-       
+
+
+
     }
 
-   void shrink_to_fit()
-   {
-       capacity = 0;
+    void shrink_to_fit()
+    {
+        capacity = 0;
 
-       T* arr = new T[size];
-       for (int i = 0; i < size; ++i)
-       {
-           arr[i] = vector[i];
-       }
+        T* arr = new T[size];
+        for (int i = 0; i < size; ++i)
+        {
+            arr[i] = vector[i];
+        }
 
-       delete[]vector;
-       vector = arr;
-       arr = nullptr;
+        delete[]vector;
+        vector = arr;
+        arr = nullptr;
 
-   }
+    }
 
     void pop_back()
     {
@@ -185,14 +174,14 @@ public:
             arr[i] = vector[i];
         }
 
-       
+
         delete[]vector;
         vector = arr;
         arr = nullptr;
         size--;
     }
 
-    void insert(int index, T value)
+    void insert(const int index, const T value)
     {
         T* arr;
         if (capacity <= 0)
@@ -204,15 +193,15 @@ public:
                 {
                     arr[i] = value;
                     ++i;
-                    
+
                 }
                 arr[i] = vector[j];
             }
-           
+
             delete[]vector;
             vector = arr;
             arr = nullptr;
-         
+
 
         }
         else
@@ -229,7 +218,7 @@ public:
                     vector[i] = vector[i - 1];
                 }
             }
-           
+
         }
 
         ++size;
@@ -246,7 +235,7 @@ public:
         arr = nullptr;
     }
 
-    void assign(int quantity, T value)
+    void assign(const int quantity, const T value)
     {
         T* arr;
         arr = new T[quantity];
@@ -264,7 +253,7 @@ public:
         arr = nullptr;
     }
 
-    T at(int index)
+    T at(const int index)
     {
         if (index < 0 || index > size - 1)
         {
@@ -277,24 +266,54 @@ public:
 
     }
 
-    T& operator [](int index) 
-    { 
-        if (index < 0 || index > size - 1)
+    T& front() { return vector[0]; }
+
+    T& back() { return vector[size - 1]; }
+
+    T* data() { return this->vector; }
+
+    string What(const int error_number)
+    {
+        if (error_number == 1)
         {
-            throw 1;
+            return "index is out of array range ";
+        }
+        if (error_number == 3)
+        {
+            return "the size of the array is too low";
+        }
+    }
+
+    Vector(const Vector& v)
+    {
+        this->size = v.size;
+        this->capacity = v.capacity;
+
+        vector = new T[size + capacity];
+
+        for (int i = 0; i < size; i++)
+        {
+            vector[i] = v.vector[i];
         }
 
-        return vector[index]; 
+    }
+
+    Vector() { vector = new T[size]; }
+
+    ~Vector()
+    {
+        delete[]vector;
+        vector = nullptr;
     }
 
     T& operator = (const Vector& v)
     {
         this->size = v.get_size();
         T* arr = new T[v.get_size()];
-        
+
         if (size > 0 && v.get_size() > 0)
         {
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < size; ++i)
             {
                 arr[i] = v.vector[i];
             }
@@ -310,37 +329,50 @@ public:
 
     }
 
-    string What(int error_number)
+    T& operator [](const int index)
     {
-        if (error_number == 1)
+        if (index < 0 || index > size - 1)
         {
-            return "index is out of array range ";
-        }
-        if (error_number == 3)
-        {
-            return "the size of the array is too low";
-        }
-    }
-
-    Vector(Vector& v)
-    {
-        this->size = v.size;
-        this->capacity = v.capacity;
-
-        vector = new T[size + capacity];
-
-        for (int i = 0; i < size; i++)
-        {
-            vector[i] = v.vector[i];
+            throw 1;
         }
 
+        return vector[index];
     }
 
-    ~Vector()
+    bool operator == (const Vector& another)
     {
-        delete[]vector;
-        vector = nullptr;
+        if (this->get_size() != another.get_size())
+        {
+            return false;
+        }
+
+        for (int i = 0; i < this->get_size(); ++i)
+        {
+            if (this->vector[i] != another.vector[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    } 
+
+    bool operator != (const Vector& another)
+    {
+        if (this->get_size() != another.get_size())
+        {
+            return true;
+        }
+
+        for (int i = 0; i < this->get_size(); ++i)
+        {
+            if (this->vector[i] != another.vector[i])
+            {
+                return true;
+            }
+        }
+        return false;
     }
+
 };
 
 
