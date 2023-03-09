@@ -1,5 +1,4 @@
-﻿
-template<typename T>
+﻿template<typename T>
 class Vector
 {
 private:
@@ -117,7 +116,7 @@ public:
 
     }
 
-    void push_back(const T value)
+    void push_back(const T& value)
     {
         T* arr;
         if (capacity <= 0)
@@ -181,7 +180,7 @@ public:
         size--;
     }
 
-    void insert(const int index, const T value)
+    void insert(const int& index, const T& value)
     {
         T* arr;
         if (capacity <= 0)
@@ -235,7 +234,7 @@ public:
         arr = nullptr;
     }
 
-    void assign(const int quantity, const T value)
+    void assign(const int& quantity, const T& value)
     {
         T* arr;
         arr = new T[quantity];
@@ -253,7 +252,7 @@ public:
         arr = nullptr;
     }
 
-    T at(const int index)
+    T at(const int& index)
     {
         if (index < 0 || index > size - 1)
         {
@@ -272,7 +271,7 @@ public:
 
     T* data() { return this->vector; }
 
-    string What(const int error_number)
+    string What(const int& error_number)
     {
         if (error_number == 1)
         {
@@ -306,6 +305,26 @@ public:
         vector = nullptr;
     }
 
+    int count(const T& value)
+    {
+        int counter = 0;
+
+        for (int i = 0; i < size; ++i)
+        {
+            if (vector[i] == value)
+            {
+                ++counter;
+            }
+        }
+
+        if (counter < 0)
+        {
+            counter = 0;
+        }
+
+        return counter;
+    }
+
     T& operator = (const Vector& v)
     {
         this->size = v.get_size();
@@ -329,7 +348,7 @@ public:
 
     }
 
-    T& operator [](const int index)
+    T& operator [](const int& index)
     {
         if (index < 0 || index > size - 1)
         {
@@ -354,7 +373,7 @@ public:
             }
         }
         return true;
-    } 
+    }
 
     bool operator != (const Vector& another)
     {
@@ -372,7 +391,7 @@ public:
         }
         return false;
     }
-    
+
     Vector operator + (const Vector& another)
     {
         if (this->get_size() > another.get_size() || this->get_size() == another.get_size())
@@ -386,12 +405,12 @@ public:
         {
             this->reserve(another.get_size() - this->get_size());
             int i = 0;
-            for ( ; i < this->get_size(); ++i)
+            for (; i < this->get_size(); ++i)
             {
                 this->vector[i] += another.vector[i];
             }
 
-            for ( ; i < another.get_size(); ++i)
+            for (; i < another.get_size(); ++i)
             {
                 this->vector[i] = another.vector[i];
             }
@@ -402,11 +421,5 @@ public:
     }
 
 };
-
-
-
-
-
-
 
 
