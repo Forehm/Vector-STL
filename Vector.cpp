@@ -1,4 +1,48 @@
-﻿template<typename T>
+﻿
+
+class StringException : public exception
+{
+private:
+    int error_number = 0;
+
+public:
+    StringException(const int& error)
+    {
+        error_number = error;
+    }
+
+    const char* What()
+    {
+        switch (error_number)
+        {
+        case 1:
+        {
+            return "index is out of array range";
+            break;
+        }
+        case 2:
+        {
+            return "the size cannot be negative";
+            break;
+        }
+        case 3:
+        {
+            return "the size of the array is too low";
+            break;
+        }
+        default:
+        {
+            break;
+        }
+        }
+    }
+};
+
+
+
+
+
+template<typename T>
 class Vector
 {
 private:
@@ -256,7 +300,7 @@ public:
     {
         if (new_size <= 0)
         {
-            throw 2;
+            throw StringException(2);
         }
 
         T* arr = new T[new_size];
@@ -277,7 +321,7 @@ public:
     {
         if (index < 0 || index > size - 1)
         {
-            throw 1;
+            throw StringException(1);
         }
         else
         {
@@ -291,32 +335,6 @@ public:
     T& back() { return vector[size - 1]; }
 
     T* data() { return this->vector; }
-
-    string What(const int& error_number)
-    {
-        switch (error_number)
-        {
-        case 1:
-        {
-            return "index is out of array range";
-            break;
-        }
-        case 2:
-        {
-            return "the size cannot be negative";
-            break;
-        }
-        case 3:
-        {
-            return "the size of the array is too low";
-            break;
-        }
-        default:
-        {
-            break;
-        }
-        }
-    }
 
     Vector(const Vector& v)
     {
@@ -332,13 +350,11 @@ public:
 
     }
 
-    Vector() { vector = new T[size]; }
-
     Vector(const int& new_size, const T& value)
     {
         if (new_size <= 0)
         {
-            throw 2;
+            throw StringException(2);
         }
         vector = new T[new_size];
         size = new_size;
@@ -348,6 +364,8 @@ public:
             vector[i] = value;
         }
     }
+
+    Vector() { vector = new T[size]; }
 
     ~Vector()
     {
@@ -393,7 +411,7 @@ public:
         }
         else
         {
-            throw 3;
+            throw StringException(3);
         }
 
     }
@@ -402,7 +420,7 @@ public:
     {
         if (index < 0 || index > size - 1)
         {
-            throw 1;
+            throw StringException(1);
         }
 
         return vector[index];
