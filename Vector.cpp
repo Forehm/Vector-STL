@@ -252,6 +252,27 @@ public:
         arr = nullptr;
     }
 
+    void resize(const int& new_size)
+    {
+        if (new_size <= 0)
+        {
+            throw 2;
+        }
+
+        T* arr = new T[new_size];
+
+        for (int i = 0; i < new_size; ++i)
+        {
+            arr[i] = vector[i];
+        }
+
+        vector = nullptr;
+        vector = arr;
+        arr = nullptr;
+
+        size = new_size;
+    }
+
     T at(const int& index)
     {
         if (index < 0 || index > size - 1)
@@ -273,13 +294,27 @@ public:
 
     string What(const int& error_number)
     {
-        if (error_number == 1)
+        switch (error_number)
         {
-            return "index is out of array range ";
+        case 1:
+        {
+            return "index is out of array range";
+            break;
         }
-        if (error_number == 3)
+        case 2:
+        {
+            return "the size cannot be negative";
+            break;
+        }
+        case 3:
         {
             return "the size of the array is too low";
+            break;
+        }
+        default:
+        {
+            break;
+        }
         }
     }
 
