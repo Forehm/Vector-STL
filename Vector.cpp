@@ -334,6 +334,21 @@ public:
 
     Vector() { vector = new T[size]; }
 
+    Vector(const int& new_size, const T& value)
+    {
+        if (new_size <= 0)
+        {
+            throw 2;
+        }
+        vector = new T[new_size];
+        size = new_size;
+
+        for (int i = 0; i < size; ++i)
+        {
+            vector[i] = value;
+        }
+    }
+
     ~Vector()
     {
         delete[]vector;
