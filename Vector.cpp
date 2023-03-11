@@ -1,15 +1,4 @@
-﻿
-
-
-
-
-
-
-
-
-
-
-class StringException : public exception
+﻿class StringException : public exception
 {
 private:
     int error_number_ = 0;
