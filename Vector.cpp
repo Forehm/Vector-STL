@@ -1,19 +1,28 @@
 ﻿
 
+
+
+
+
+
+
+
+
+
 class StringException : public exception
 {
 private:
-    int error_number = 0;
+    int error_number_ = 0;
 
 public:
     StringException(const int& error)
     {
-        error_number = error;
+        error_number_ = error;
     }
 
     const char* What()
     {
-        switch (error_number)
+        switch (error_number_)
         {
         case 1:
         {
@@ -39,18 +48,15 @@ public:
 };
 
 
-
-
-
 template<typename T>
 class Vector
 {
 private:
 
 
-    int size = 0;
-    int capacity = 0;
-    T* vector;
+    int size_ = 0;
+    int capacity_ = 0;
+    T* vector_;
 
 
 public:
@@ -119,43 +125,40 @@ public:
     private:
         T* ptr_;
     };
+    iterator begin() { return iterator(vector_); }
 
+    iterator end() { return iterator(vector_ + size_); }
 
+    reverse_iterator rbegin() { return reverse_iterator(&vector_[size_ - 1]); }
 
-    iterator begin() { return iterator(vector); }
+    reverse_iterator rend() { return reverse_iterator(vector_ - 1); }
 
-    iterator end() { return iterator(vector + size); }
+    const_reverse_iterator crbegin() const { return const_reverse_iterator(&vector_[size_ - 1]); }
 
-    reverse_iterator rbegin() { return reverse_iterator(&vector[size - 1]); }
+    const_reverse_iterator crend() const { return const_reverse_iterator(vector_ - 1); }
 
-    reverse_iterator rend() { return reverse_iterator(vector - 1); }
+    const_iterator cbegin() const { return const_iterator(vector_); }
 
-    const_reverse_iterator crbegin() const { return const_reverse_iterator(&vector[size - 1]); }
+    const_iterator cend() const { return const_iterator(vector_ + size_); }
 
-    const_reverse_iterator crend() const { return const_reverse_iterator(vector - 1); }
+    int get_capacity() const { return capacity_; }
 
-    const_iterator cbegin() const { return const_iterator(vector); }
+    int get_size() const { return size_; }
 
-    const_iterator cend() const { return const_iterator(vector + size); }
-
-    int get_capacity() const { return capacity; }
-
-    int get_size() const { return size; }
-
-    bool is_empty() const { return size == 0; }
+    bool is_empty() const { return size_ == 0; }
 
     void reserve(const int value)
     {
-        capacity = value;
+        capacity_ = value;
 
-        T* arr = new T[size + value];
-        for (int i = 0; i < size; ++i)
+        T* arr = new T[size_ + value];
+        for (int i = 0; i < size_; ++i)
         {
-            arr[i] = vector[i];
+            arr[i] = vector_[i];
         }
 
-        delete[]vector;
-        vector = arr;
+        delete[]vector_;
+        vector_ = arr;
         arr = nullptr;
 
     }
@@ -163,28 +166,28 @@ public:
     void push_back(const T& value)
     {
         T* arr;
-        if (capacity <= 0)
+        if (capacity_ <= 0)
         {
-            arr = new T[size + 1];
-            for (int i = 0; i < size; ++i)
+            arr = new T[size_ + 1];
+            for (int i = 0; i < size_; ++i)
             {
-                arr[i] = vector[i];
+                arr[i] = vector_[i];
             }
-            arr[size] = value;
-            delete[]vector;
-            vector = arr;
+            arr[size_] = value;
+            delete[]vector_;
+            vector_ = arr;
             arr = nullptr;
-            ++size;
+            ++size_;
 
         }
         else
         {
-            vector[size] = value;
-            if (capacity > 0)
+            vector_[size_] = value;
+            if (capacity_ > 0)
             {
-                capacity--;
+                --capacity_;
             }
-            ++size;
+            ++size_;
         }
 
 
@@ -194,43 +197,42 @@ public:
 
     void shrink_to_fit()
     {
-        capacity = 0;
+        capacity_ = 0;
 
-        T* arr = new T[size];
-        for (int i = 0; i < size; ++i)
+        T* arr = new T[size_];
+        for (int i = 0; i < size_; ++i)
         {
-            arr[i] = vector[i];
+            arr[i] = vector_[i];
         }
 
-        delete[]vector;
-        vector = arr;
+        delete[]vector_;
+        vector_ = arr;
         arr = nullptr;
 
     }
 
     void pop_back()
     {
-        T* arr = new T[size - 1];
+        T* arr = new T[size_ - 1];
 
-        for (int i = 0; i < size - 1; ++i)
+        for (int i = 0; i < size_ - 1; ++i)
         {
-            arr[i] = vector[i];
+            arr[i] = vector_[i];
         }
 
 
-        delete[]vector;
-        vector = arr;
+        delete[]vector_;
+        vector_ = arr;
         arr = nullptr;
-        size--;
+        --size_;
     }
-
     void insert(const int& index, const T& value)
     {
         T* arr;
-        if (capacity <= 0)
+        if (capacity_ <= 0)
         {
-            arr = new T[size + 1];
-            for (int i = 0, j = 0; j < size; ++i, ++j)
+            arr = new T[size_ + 1];
+            for (int i = 0, j = 0; j < size_; ++i, ++j)
             {
                 if (i == index)
                 {
@@ -238,27 +240,27 @@ public:
                     ++i;
 
                 }
-                arr[i] = vector[j];
+                arr[i] = vector_[j];
             }
 
-            delete[]vector;
-            vector = arr;
+            delete[]vector_;
+            vector_ = arr;
             arr = nullptr;
 
 
         }
         else
         {
-            for (int i = size; i > 0; i--)
+            for (int i = size_; i > 0; i--)
             {
                 if (i == index)
                 {
-                    vector[i] = value;
+                    vector_[i] = value;
                     break;
                 }
                 else
                 {
-                    vector[i] = vector[i - 1];
+                    vector_[i] = vector_[i - 1];
                 }
             }
 
@@ -270,11 +272,11 @@ public:
 
     void clear()
     {
-        size = 0;
-        capacity = 0;
-        T* arr = new T[size + capacity];
-        delete[] vector;
-        vector = arr;
+        size_ = 0;
+        capacity_ = 0;
+        T* arr = new T[size_ + capacity_];
+        delete[] vector_;
+        vector_ = arr;
         arr = nullptr;
     }
 
@@ -282,8 +284,8 @@ public:
     {
         T* arr;
         arr = new T[quantity];
-        size = quantity;
-        capacity = 0;
+        size_ = quantity;
+        capacity_ = 0;
 
         for (int i = 0; i < quantity; i++)
         {
@@ -291,8 +293,8 @@ public:
         }
 
 
-        delete[]vector;
-        vector = arr;
+        delete[]vector_;
+        vector_ = arr;
         arr = nullptr;
     }
 
@@ -307,45 +309,45 @@ public:
 
         for (int i = 0; i < new_size; ++i)
         {
-            arr[i] = vector[i];
+            arr[i] = vector_[i];
         }
 
-        vector = nullptr;
-        vector = arr;
+        vector_ = nullptr;
+        vector_ = arr;
         arr = nullptr;
 
-        size = new_size;
+        size_ = new_size;
     }
 
     T at(const int& index)
     {
-        if (index < 0 || index > size - 1)
+        if (index < 0 || index > size_ - 1)
         {
             throw StringException(1);
         }
         else
         {
-            return vector[index];
+            return vector_[index];
         }
 
     }
 
-    T& front() { return vector[0]; }
+    T& front() { return vector_[0]; }
 
-    T& back() { return vector[size - 1]; }
+    T& back() { return vector_[size_ - 1]; }
 
-    T* data() { return this->vector; }
+    T* data() { return this->vector_; }
 
     Vector(const Vector& v)
     {
-        this->size = v.size;
-        this->capacity = v.capacity;
+        this->size_ = v.size_;
+        this->capacity_ = v.capacity_;
 
-        vector = new T[size + capacity];
+        vector_ = new T[size_ + capacity_];
 
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < size_; i++)
         {
-            vector[i] = v.vector[i];
+            vector_[i] = v.vector_[i];
         }
 
     }
@@ -356,30 +358,30 @@ public:
         {
             throw StringException(2);
         }
-        vector = new T[new_size];
-        size = new_size;
+        vector_ = new T[new_size];
+        size_ = new_size;
 
-        for (int i = 0; i < size; ++i)
+        for (int i = 0; i < size_; ++i)
         {
-            vector[i] = value;
+            vector_[i] = value;
         }
     }
 
-    Vector() { vector = new T[size]; }
+    Vector() { vector_ = new T[size_]; }
 
     ~Vector()
     {
-        delete[]vector;
-        vector = nullptr;
+        delete[]vector_;
+        vector_ = nullptr;
     }
 
     int count(const T& value)
     {
         int counter = 0;
 
-        for (int i = 0; i < size; ++i)
+        for (int i = 0; i < size_; ++i)
         {
-            if (vector[i] == value)
+            if (vector_[i] == value)
             {
                 ++counter;
             }
@@ -395,18 +397,18 @@ public:
 
     T& operator = (const Vector& v)
     {
-        this->size = v.get_size();
+        this->size_ = v.get_size();
         T* arr = new T[v.get_size()];
 
-        if (size > 0 && v.get_size() > 0)
+        if (size_ > 0 && v.get_size() > 0)
         {
-            for (int i = 0; i < size; ++i)
+            for (int i = 0; i < size_; ++i)
             {
-                arr[i] = v.vector[i];
+                arr[i] = v.vector_[i];
             }
 
-            delete[] vector;
-            vector = arr;
+            delete[] vector_;
+            vector_ = arr;
             arr = nullptr;
         }
         else
@@ -418,14 +420,13 @@ public:
 
     T& operator [](const int& index)
     {
-        if (index < 0 || index > size - 1)
+        if (index < 0 || index > size_ - 1)
         {
             throw StringException(1);
         }
 
-        return vector[index];
+        return vector_[index];
     }
-
     bool operator == (const Vector& another)
     {
         if (this->get_size() != another.get_size())
@@ -435,7 +436,7 @@ public:
 
         for (int i = 0; i < this->get_size(); ++i)
         {
-            if (this->vector[i] != another.vector[i])
+            if (this->vector_[i] != another.vector_[i])
             {
                 return false;
             }
@@ -452,7 +453,7 @@ public:
 
         for (int i = 0; i < this->get_size(); ++i)
         {
-            if (this->vector[i] != another.vector[i])
+            if (this->vector_[i] != another.vector_[i])
             {
                 return true;
             }
@@ -466,7 +467,7 @@ public:
         {
             for (int i = 0; i < another.get_size(); ++i)
             {
-                this->vector[i] += another.vector[i];
+                this->vector_[i] += another.vector_[i];
             }
         }
         else
@@ -475,19 +476,17 @@ public:
             int i = 0;
             for (; i < this->get_size(); ++i)
             {
-                this->vector[i] += another.vector[i];
+                this->vector_[i] += another.vector_[i];
             }
 
             for (; i < another.get_size(); ++i)
             {
-                this->vector[i] = another.vector[i];
+                this->vector_[i] = another.vector_[i];
             }
-            size += capacity;
-            capacity = 0;
+            size_ += capacity_;
+            capacity_ = 0;
         }
         return *this;
     }
 
 };
-
-
