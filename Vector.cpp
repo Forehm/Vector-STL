@@ -183,7 +183,6 @@ public:
 
 
     }
-
     void shrink_to_fit()
     {
         capacity_ = 0;
@@ -357,7 +356,6 @@ public:
     }
 
     Vector() { vector_ = new T[size_]; }
-
     ~Vector()
     {
         delete[]vector_;
@@ -450,6 +448,51 @@ public:
         return false;
     }
 
+    template <typename int>
+    void sort()
+    {
+        int temp;
+        for (int i = 0; i < size_; ++i)
+        {
+            if (vector_[i] > vector_[i + 1])
+            {
+                temp = vector_[i];
+                vector_[i] = vector_[i + 1];
+                vector_[i + 1] = temp;
+            }
+        }
+    }
+
+    template <typename double>
+    void sort()
+    {
+        int temp;
+        for (int i = 0; i < size_; ++i)
+        {
+            if (vector_[i] > vector_[i + 1])
+            {
+                temp = vector_[i];
+                vector_[i] = vector_[i + 1];
+                vector_[i + 1] = temp;
+            }
+        }
+    }
+
+    template <typename float>
+    void sort()
+    {
+        int temp;
+        for (int i = 0; i < size_; ++i)
+        {
+            if (vector_[i] > vector_[i + 1])
+            {
+                temp = vector_[i];
+                vector_[i] = vector_[i + 1];
+                vector_[i + 1] = temp;
+            }
+        }
+    }
+
     Vector operator + (const Vector& another)
     {
         if (this->get_size() > another.get_size() || this->get_size() == another.get_size())
@@ -479,3 +522,5 @@ public:
     }
 
 };
+
+
