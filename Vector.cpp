@@ -114,6 +114,7 @@ public:
     private:
         T* ptr_;
     };
+
     iterator begin() { return iterator(vector_); }
 
     iterator end() { return iterator(vector_ + size_); }
