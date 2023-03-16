@@ -1,10 +1,10 @@
-﻿class StringException : public exception
+﻿class VectorException : public exception
 {
 private:
     int error_number_ = 0;
 
 public:
-    StringException(const int& error)
+    VectorException(const int& error)
     {
         error_number_ = error;
     }
@@ -295,7 +295,7 @@ public:
     {
         if (new_size <= 0)
         {
-            throw StringException(2);
+            throw VectorException(2);
         }
 
         T* arr = new T[new_size];
@@ -316,7 +316,7 @@ public:
     {
         if (index < 0 || index > size_ - 1)
         {
-            throw StringException(1);
+            throw VectorException(1);
         }
         else
         {
@@ -349,7 +349,7 @@ public:
     {
         if (new_size <= 0)
         {
-            throw StringException(2);
+            throw VectorException(2);
         }
         vector_ = new T[new_size];
         size_ = new_size;
@@ -406,7 +406,7 @@ public:
         }
         else
         {
-            throw StringException(3);
+            throw VectorException(3);
         }
 
     }
@@ -415,7 +415,7 @@ public:
     {
         if (index < 0 || index > size_ - 1)
         {
-            throw StringException(1);
+            throw VectorException(1);
         }
 
         return vector_[index];
