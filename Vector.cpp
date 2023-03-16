@@ -184,6 +184,7 @@ public:
 
 
     }
+
     void shrink_to_fit()
     {
         capacity_ = 0;
@@ -215,6 +216,7 @@ public:
         arr = nullptr;
         --size_;
     }
+
     void insert(const int& index, const T& value)
     {
         T* arr;
@@ -357,6 +359,7 @@ public:
     }
 
     Vector() { vector_ = new T[size_]; }
+
     ~Vector()
     {
         delete[]vector_;
@@ -415,6 +418,7 @@ public:
 
         return vector_[index];
     }
+
     bool operator == (const Vector& another)
     {
         if (this->get_size() != another.get_size())
