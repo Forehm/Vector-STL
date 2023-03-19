@@ -143,6 +143,7 @@ public:
     int get_size() const { return size_; }
 
     bool is_empty() const { return size_ == 0; }
+
     void reserve(const int value)
     {
         capacity_ = value;
@@ -331,6 +332,8 @@ public:
     T& back() { return vector_[size_ - 1]; }
 
     T* data() { return this->vector_; }
+
+    T* rdata() { return this->vector_ + (size_ - 1); }
 
     Vector(const Vector& v)
     {
