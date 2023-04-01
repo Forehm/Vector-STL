@@ -350,6 +350,12 @@ public:
 
     }
 
+    Vector(const size_t& new_size)
+    {
+        vector_ = new T[new_size];
+    }
+    
+    
     Vector(const int& new_size, const T& value)
     {
         if (new_size <= 0)
