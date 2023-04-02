@@ -7,10 +7,10 @@ using namespace std;
 class VectorException : public std::exception
 {
 private:
-    int error_number_ = 0;
+    size_t error_number_ = 0;
 
 public:
-    VectorException(const int& error)
+    VectorException(const size_t& error)
     {
         error_number_ = error;
     }
@@ -471,7 +471,7 @@ public:
     {
         if (this->get_size() > another.get_size() || this->get_size() == another.get_size())
         {
-            for (int i = 0; i < another.get_size(); ++i)
+            for (size_t i = 0; i < another.get_size(); ++i)
             {
                 this->vector_[i] += another.vector_[i];
             }
@@ -479,7 +479,7 @@ public:
         else
         {
             this->reserve(another.get_size() - this->get_size());
-            int i = 0;
+            size_t i = 0;
             for (; i < this->get_size(); ++i)
             {
                 this->vector_[i] += another.vector_[i];
