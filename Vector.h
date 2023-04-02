@@ -353,6 +353,7 @@ public:
     Vector(const size_t& new_size)
     {
         vector_ = new T[new_size];
+        size_ = new_size;
     }
     
     
