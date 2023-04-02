@@ -49,8 +49,8 @@ class Vector
 private:
 
 
-    int size_ = 0;
-    int capacity_ = 0;
+    size_t size_ = 0;
+    size_t capacity_ = 0;
     T* vector_;
 
 
@@ -139,9 +139,9 @@ public:
 
     const_iterator cend() const { return const_iterator(vector_ + size_); }
 
-    int get_capacity() const { return capacity_; }
+    size_t get_capacity() const { return capacity_; }
 
-    int get_size() const { return size_; }
+    size_t get_size() const { return size_; }
 
     bool is_empty() const { return size_ == 0; }
 
@@ -150,7 +150,7 @@ public:
         capacity_ = value;
 
         T* arr = new T[size_ + value];
-        for (int i = 0; i < size_; ++i)
+        for (size_t i = 0; i < size_; ++i)
         {
             arr[i] = vector_[i];
         }
@@ -167,7 +167,7 @@ public:
         if (capacity_ <= 0)
         {
             arr = new T[size_ + 1];
-            for (int i = 0; i < size_; ++i)
+            for (size_t i = 0; i < size_; ++i)
             {
                 arr[i] = vector_[i];
             }
@@ -197,7 +197,7 @@ public:
         capacity_ = 0;
 
         T* arr = new T[size_];
-        for (int i = 0; i < size_; ++i)
+        for (size_t i = 0; i < size_; ++i)
         {
             arr[i] = vector_[i];
         }
