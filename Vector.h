@@ -145,7 +145,7 @@ public:
 
     bool is_empty() const { return size_ == 0; }
 
-    void reserve(const int value)
+    void reserve(const size_t value)
     {
         capacity_ = value;
 
@@ -212,7 +212,7 @@ public:
     {
         T* arr = new T[size_ - 1];
 
-        for (int i = 0; i < size_ - 1; ++i)
+        for (size_t i = 0; i < size_ - 1; ++i)
         {
             arr[i] = vector_[i];
         }
@@ -224,13 +224,13 @@ public:
         --size_;
     }
 
-    void insert(const int& index, const T& value)
+    void insert(const size_t& index, const T& value)
     {
         T* arr;
         if (capacity_ <= 0)
         {
             arr = new T[size_ + 1];
-            for (int i = 0, j = 0; j < size_; ++i, ++j)
+            for (size_t i = 0, j = 0; j < size_; ++i, ++j)
             {
                 if (i == index)
                 {
@@ -249,7 +249,7 @@ public:
         }
         else
         {
-            for (int i = size_; i > 0; i--)
+            for (size_t i = size_; i > 0; i--)
             {
                 if (i == index)
                 {
@@ -278,14 +278,14 @@ public:
         arr = nullptr;
     }
 
-    void assign(const int& quantity, const T& value)
+    void assign(const size_t& quantity, const T& value)
     {
         T* arr;
         arr = new T[quantity];
         size_ = quantity;
         capacity_ = 0;
 
-        for (int i = 0; i < quantity; i++)
+        for (size_t i = 0; i < quantity; i++)
         {
             arr[i] = value;
         }
@@ -296,7 +296,7 @@ public:
         arr = nullptr;
     }
 
-    void resize(const int& new_size)
+    void resize(const size_t& new_size)
     {
         if (new_size <= 0)
         {
@@ -305,7 +305,7 @@ public:
 
         T* arr = new T[new_size];
 
-        for (int i = 0; i < new_size; ++i)
+        for (size_t i = 0; i < new_size; ++i)
         {
             arr[i] = vector_[i];
         }
@@ -317,7 +317,7 @@ public:
         size_ = new_size;
     }
 
-    T at(const int& index)
+    T at(const size_t& index)
     {
         if (index < 0 || index > size_ - 1)
         {
@@ -343,7 +343,7 @@ public:
 
         vector_ = new T[size_ + capacity_];
 
-        for (int i = 0; i < size_; i++)
+        for (size_t i = 0; i < size_; i++)
         {
             vector_[i] = v.vector_[i];
         }
@@ -357,7 +357,7 @@ public:
     }
     
     
-    Vector(const int& new_size, const T& value)
+    Vector(const size_t& new_size, const T& value)
     {
         if (new_size <= 0)
         {
@@ -366,7 +366,7 @@ public:
         vector_ = new T[new_size];
         size_ = new_size;
 
-        for (int i = 0; i < size_; ++i)
+        for (size_t i = 0; i < size_; ++i)
         {
             vector_[i] = value;
         }
@@ -380,11 +380,11 @@ public:
         vector_ = nullptr;
     }
 
-    int count(const T& value)
+    size_t count(const T& value)
     {
-        int counter = 0;
+        size_t counter = 0;
 
-        for (int i = 0; i < size_; ++i)
+        for (size_t i = 0; i < size_; ++i)
         {
             if (vector_[i] == value)
             {
@@ -407,7 +407,7 @@ public:
 
         if (size_ > 0 && v.get_size() > 0)
         {
-            for (int i = 0; i < size_; ++i)
+            for (size_t i = 0; i < size_; ++i)
             {
                 arr[i] = v.vector_[i];
             }
@@ -440,7 +440,7 @@ public:
             return false;
         }
 
-        for (int i = 0; i < this->get_size(); ++i)
+        for (size_t i = 0; i < this->get_size(); ++i)
         {
             if (this->vector_[i] != another.vector_[i])
             {
@@ -457,7 +457,7 @@ public:
             return true;
         }
 
-        for (int i = 0; i < this->get_size(); ++i)
+        for (size_t i = 0; i < this->get_size(); ++i)
         {
             if (this->vector_[i] != another.vector_[i])
             {
