@@ -435,6 +435,29 @@ public:
         }
 
     }
+   
+    T& operator = (const vector<T>& v)
+    {
+        this->size_ = v.size();
+        T* arr = new T[v.size()];
+
+        if (size_ > 0 && v.size() > 0)
+        {
+            for (size_t i = 0; i < size_; ++i)
+            {
+                arr[i] = v[i];
+            }
+
+            delete[] vector_;
+            vector_ = arr;
+            arr = nullptr;
+        }
+        else
+        {
+            throw VectorException(3);
+        }
+
+    }
 
     T& operator [](const int& index)
     {
