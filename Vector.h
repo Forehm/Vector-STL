@@ -350,6 +350,19 @@ public:
 
     }
 
+    Vector(const vector<T>& v)
+    {
+        this->size_ = v.size();
+        this->capacity_ = v.capacity();
+
+        vector_ = new T[size_ + capacity_];
+
+        for (size_t i = 0; i < size_; i++)
+        {
+            vector_[i] = v[i];
+        }
+    }
+
     Vector(const size_t& new_size)
     {
         vector_ = new T[new_size];
