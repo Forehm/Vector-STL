@@ -53,6 +53,12 @@ private:
     size_t capacity_ = 0;
     T* vector_;
 
+    void SwapArrays(T* array)
+    {
+        delete[]vector_;
+        vector_ = array;
+        array = nullptr;
+    }
 
 public:
 
@@ -155,9 +161,7 @@ public:
             arr[i] = vector_[i];
         }
 
-        delete[]vector_;
-        vector_ = arr;
-        arr = nullptr;
+        SwapArrays(arr);
 
     }
 
@@ -172,9 +176,7 @@ public:
                 arr[i] = vector_[i];
             }
             arr[size_] = value;
-            delete[]vector_;
-            vector_ = arr;
-            arr = nullptr;
+            SwapArrays(arr);
             ++size_;
 
         }
@@ -202,9 +204,7 @@ public:
             arr[i] = vector_[i];
         }
 
-        delete[]vector_;
-        vector_ = arr;
-        arr = nullptr;
+        SwapArrays(arr);
 
     }
 
@@ -218,9 +218,7 @@ public:
         }
 
 
-        delete[]vector_;
-        vector_ = arr;
-        arr = nullptr;
+        SwapArrays(arr);
         --size_;
     }
 
@@ -241,9 +239,7 @@ public:
                 arr[i] = vector_[j];
             }
 
-            delete[]vector_;
-            vector_ = arr;
-            arr = nullptr;
+            SwapArrays(arr);
 
 
         }
@@ -273,9 +269,7 @@ public:
         size_ = 0;
         capacity_ = 0;
         T* arr = new T[size_ + capacity_];
-        delete[] vector_;
-        vector_ = arr;
-        arr = nullptr;
+        SwapArrays(arr);
     }
 
     void assign(const size_t& quantity, const T& value)
@@ -291,9 +285,7 @@ public:
         }
 
 
-        delete[]vector_;
-        vector_ = arr;
-        arr = nullptr;
+        SwapArrays(arr);
     }
 
     void resize(const size_t& new_size)
@@ -310,9 +302,7 @@ public:
             arr[i] = vector_[i];
         }
 
-        vector_ = nullptr;
-        vector_ = arr;
-        arr = nullptr;
+        SwapArrays(arr);
 
         size_ = new_size;
     }
@@ -425,9 +415,7 @@ public:
                 arr[i] = v.vector_[i];
             }
 
-            delete[] vector_;
-            vector_ = arr;
-            arr = nullptr;
+            SwapArrays(arr);
         }
         else
         {
@@ -448,9 +436,7 @@ public:
                 arr[i] = v[i];
             }
 
-            delete[] vector_;
-            vector_ = arr;
-            arr = nullptr;
+            SwapArrays(arr);
         }
         else
         {
