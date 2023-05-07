@@ -77,7 +77,7 @@ public:
         bool operator!=(const iterator& rhs) { return ptr_ != rhs.ptr_; }
 
 
-    private:
+private:
         T* ptr_;
     };
 
