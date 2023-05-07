@@ -102,6 +102,7 @@ private:
     class reverse_iterator
     {
     public:
+    
         reverse_iterator(T* ptr) : ptr_(ptr) { }
         reverse_iterator operator++() { reverse_iterator i = *this; ptr_--; return i; }
         reverse_iterator operator++(int junk) { ptr_--; return *this; }
@@ -117,6 +118,7 @@ private:
     class const_reverse_iterator
     {
     public:
+    
         const_reverse_iterator(T* ptr) : ptr_(ptr) { }
         const_reverse_iterator operator++() { const_reverse_iterator i = *this; ptr_--; return i; }
         const_reverse_iterator operator++(int junk) { ptr_--; return *this; }
