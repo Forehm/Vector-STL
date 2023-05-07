@@ -4,6 +4,8 @@
 
 using namespace std;
 
+
+
 class VectorException : public std::exception
 {
 private:
