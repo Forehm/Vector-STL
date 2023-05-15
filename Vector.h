@@ -198,6 +198,7 @@ private:
 
 
     }
+    
     void shrink_to_fit()
     {
         capacity_ = 0;
