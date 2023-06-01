@@ -507,6 +507,7 @@ private:
         {
             this->reserve(another.get_size() - this->get_size());
             size_t i = 0;
+            
             for (; i < this->get_size(); ++i)
             {
                 this->vector_[i] += another.vector_[i];
@@ -516,6 +517,7 @@ private:
             {
                 this->vector_[i] = another.vector_[i];
             }
+            
             size_ += capacity_;
             capacity_ = 0;
         }
