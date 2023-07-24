@@ -3,6 +3,7 @@
 #include <vector>   
 
 
+
 class VectorException : public std::exception
 {
 private:
