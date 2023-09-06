@@ -168,7 +168,7 @@ public:
 
     void resize(const size_t& new_size);
 
-    T at(const size_t& index);
+    T& at(const size_t& index);
 
     T& front();
 
@@ -374,7 +374,7 @@ void Vector<T>::resize(const size_t& new_size)
 }
 
 template<typename T>
-T Vector<T>::at(const size_t& index)
+T& Vector<T>::at(const size_t& index)
 {
     if (index < 0 || index > size_ - 1)
     {
@@ -382,7 +382,7 @@ T Vector<T>::at(const size_t& index)
     }
     else
     {
-        return vector_[index];
+        return &vector_[index];
     }
 
 }
