@@ -3,8 +3,8 @@ It is a copy of vector from the standard template library. It works the same way
 This class is compatible with an std::vector and will use std exceptions soon...
 The project requires C++17 and x86
 Functionality:
-1) begin() - the same as in std::vector
-2) end() - the same as in std::vector
+1) **begin()** - the same as in std::vector
+2) **end()** - the same as in std::vector
 3) rbegin() - the same as in std::vector
 4) rend() - the same as in std::vector
 5) crbegin() - the same as in std::vector
